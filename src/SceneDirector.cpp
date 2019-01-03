@@ -39,9 +39,6 @@ SceneDirector::SceneDirector() {
 
     TTF_Init();
 
-    Mix_AllocateChannels(2);
-    Mix_OpenAudio(48000, AUDIO_S16, 2, 4096);
-
     _now = SDL_GetPerformanceCounter();
     _last = 0;
     _exFatWarningScene = NULL;
@@ -71,9 +68,6 @@ SceneDirector::~SceneDirector() {
     if (_packageDownloadScene != NULL)
         delete _packageDownloadScene;
 
-    Mix_HaltChannel(-1);
-    Mix_CloseAudio();
-    Mix_Quit();
     TTF_Quit();
 
     if (SceneDirector::renderer != NULL)

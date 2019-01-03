@@ -23,6 +23,7 @@
 #include "NetManager.hpp"
 #include "AssetManager.hpp"
 #include "ConfigManager.hpp"
+#include "SoundManager.hpp"
 
 using namespace std;
 
@@ -36,6 +37,7 @@ int main(int argc, char **argv)
     }
 
     NetManager::initialize();
+    SoundManager::initialize();
 
     if (!AssetManager::initialize()) {
         AssetManager::dealloc();
@@ -50,6 +52,7 @@ int main(int argc, char **argv)
     }
 
     AssetManager::dealloc();
+    SoundManager::dealloc();
     NetManager::dealloc();
     ConfigManager::dealloc();
     delete sceneDirector;

@@ -19,14 +19,9 @@
 #include "SceneDirector.hpp"
 
 void AssetManager::dealloc() {
-    if (AssetManager::select != NULL)
-        Mix_FreeChunk(AssetManager::select);
-
-    if (AssetManager::back != NULL)
-        Mix_FreeChunk(AssetManager::back);
-
-    if (AssetManager::enter != NULL)
-        Mix_FreeChunk(AssetManager::enter);
+    delete AssetManager::select;
+    delete AssetManager::back;
+    delete AssetManager::enter;
 
     if (AssetManager::large_button_font != NULL)
         TTF_CloseFont(AssetManager::large_button_font);
@@ -128,9 +123,9 @@ bool AssetManager::initialize() {
     if (!AssetManager::large_button_font)
         return false;
 
-    AssetManager::enter = Mix_LoadWAV("romfs:/enter.wav");
-    AssetManager::back = Mix_LoadWAV("romfs:/back.wav");
-    AssetManager::select = Mix_LoadWAV("romfs:/select.wav");
+    AssetManager::enter = new Sound("romfs:/enter.mp3");
+    AssetManager::back = new Sound("romfs:/back.mp3");
+    AssetManager::select = new Sound("romfs:/select.mp3");
 
     return true;
 }

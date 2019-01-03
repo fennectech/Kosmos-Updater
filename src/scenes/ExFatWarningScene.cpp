@@ -19,6 +19,7 @@
 #include "../SceneDirector.hpp"
 #include "../AssetManager.hpp"
 #include "../ConfigManager.hpp"
+#include "../SoundManager.hpp"
 
 ExFatWarningScene::ExFatWarningScene() {
     _timeSpent = -10000;
@@ -56,7 +57,7 @@ ExFatWarningScene::~ExFatWarningScene() {
 
 void ExFatWarningScene::handleButton(u32 buttons) {
     if (buttons > 0 && _footerVisible) {
-        Mix_PlayChannel(-1, AssetManager::enter, 0);
+        SoundManager::playSound(AssetManager::enter);
         ConfigManager::setReceivedExFATWarning(true);
         SceneDirector::currentScene = (ConfigManager::shouldAutoUpdate()) ? SCENE_APP_UPDATE : SCENE_PACKAGE_SELECT;
     }

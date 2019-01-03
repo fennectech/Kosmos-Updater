@@ -20,9 +20,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
 #include <string>
 #include <switch.h>
+#include "models/Sound.hpp"
 
 using namespace std;
 
@@ -66,9 +66,9 @@ class AssetManager {
         static inline TTF_Font * large_button_font = NULL;
  
         /* Sounds */
-        static inline Mix_Chunk * enter = NULL;
-        static inline Mix_Chunk * back = NULL;
-        static inline Mix_Chunk * select = NULL;
+        static inline Sound * enter = NULL;
+        static inline Sound * back = NULL;
+        static inline Sound * select = NULL;
         
         static bool initialize();
         static void dealloc();

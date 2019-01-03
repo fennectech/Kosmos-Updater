@@ -18,6 +18,7 @@
 #include "MultiSelectView.hpp"
 #include "../AssetManager.hpp"
 #include "../SceneDirector.hpp"
+#include "../SoundManager.hpp"
 
 MultiSelectView::MultiSelectView(string title, vector<string> options, string selectedOption) : ModalView() {
     _startY = 720 - (224 + min((int) options.size(), 4) * 71);
@@ -63,21 +64,21 @@ MultiSelectView::~MultiSelectView() {
 
 void MultiSelectView::handleButton(u32 buttons) {
     if (buttons & KEY_A) {
-        Mix_PlayChannel(-1, AssetManager::enter, 0);
+        SoundManager::playSound(AssetManager::enter);
         dismiss(true);
     }
 
     if (buttons & KEY_B) {
-        Mix_PlayChannel(-1, AssetManager::back, 0);
+        SoundManager::playSound(AssetManager::back);
         dismiss(false);
     }
 
     if (buttons & KEY_UP && _goUp()) {
-        Mix_PlayChannel(-1, AssetManager::select, 0);
+        SoundManager::playSound(AssetManager::select);
     }
 
     if (buttons & KEY_DOWN && _goDown()) {
-        Mix_PlayChannel(-1, AssetManager::select, 0);
+        SoundManager::playSound(AssetManager::select);
     }
 }
 

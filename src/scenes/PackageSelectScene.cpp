@@ -19,6 +19,7 @@
 #include "../SceneDirector.hpp"
 #include "../NetManager.hpp"
 #include "../ConfigManager.hpp"
+#include "../SoundManager.hpp"
 
 using namespace std::placeholders;
 
@@ -154,12 +155,12 @@ PackageSelectScene::~PackageSelectScene() {
 
 void PackageSelectScene::handleButton(u32 buttons) {
     if (!_statusView->hidden && buttons & KEY_A) {
-        Mix_PlayChannel(-1, AssetManager::back, 0);
+        SoundManager::playSound(AssetManager::back);
         SceneDirector::exitApp = true;
     }
     else if (_updateView->hidden && _statusView->hidden) {
         if (buttons & KEY_A) {
-            Mix_PlayChannel(-1, AssetManager::enter, 0);
+            SoundManager::playSound(AssetManager::enter);
 
             switch(_focusSelection) {
                 case 0:
@@ -195,18 +196,18 @@ void PackageSelectScene::handleButton(u32 buttons) {
         }
 
         if (buttons & KEY_B) {
-            Mix_PlayChannel(-1, AssetManager::back, 0);
+            SoundManager::playSound(AssetManager::back);
             SceneDirector::exitApp = true;
         }
 
         if (buttons & KEY_UP && _focusSelection != 0) {
-            Mix_PlayChannel(-1, AssetManager::select, 0);
+            SoundManager::playSound(AssetManager::select);
             _focusSelection--;
             _manageFocus();
         }
 
         if (buttons & KEY_DOWN && _focusSelection != 3) {
-            Mix_PlayChannel(-1, AssetManager::select, 0);
+            SoundManager::playSound(AssetManager::select);
             _focusSelection++;
             _manageFocus();
         }

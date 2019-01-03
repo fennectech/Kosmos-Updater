@@ -19,6 +19,7 @@
 #include "AlertView.hpp"
 #include "../AssetManager.hpp"
 #include "../SceneDirector.hpp"
+#include "../SoundManager.hpp"
 
 AlertView::AlertView(string title, string message, vector<string> buttons) {
     _focusSelection = 0;
@@ -66,7 +67,7 @@ AlertView::~AlertView() {
 
 void AlertView::handleButton(u32 buttons) {
     if (buttons & KEY_LEFT && _focusSelection > 0) {
-        Mix_PlayChannel(-1, AssetManager::select, 0);
+        SoundManager::playSound(AssetManager::select);
         _focusSelection--;
         int i = 0;
         for (auto const& button : _buttons) {
@@ -75,7 +76,7 @@ void AlertView::handleButton(u32 buttons) {
         }
     }
     else if (buttons & KEY_RIGHT && _focusSelection < (int) _buttons.size() - 1) {
-        Mix_PlayChannel(-1, AssetManager::select, 0);
+        SoundManager::playSound(AssetManager::select);
         _focusSelection++;
         int i = 0;
         for (auto const& button : _buttons) {
@@ -84,11 +85,11 @@ void AlertView::handleButton(u32 buttons) {
         }
     }
     else if (buttons & KEY_A) {
-        Mix_PlayChannel(-1, AssetManager::enter, 0);
+        SoundManager::playSound(AssetManager::enter);
         dismiss(true);
     }
     else if (buttons & KEY_B) {
-        Mix_PlayChannel(-1, AssetManager::back, 0);
+        SoundManager::playSound(AssetManager::back);
         dismiss(false);
     }
 }
