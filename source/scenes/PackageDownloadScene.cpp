@@ -125,13 +125,13 @@ namespace ku::scenes {
     	        }
     	        else {
     	            SceneDirector::exitApp = true;
-        	    }
-	    	}
+	        	    }
+		    	}
+			}
+		else {
+				bpcRebootSystem();
+			}
 		}
-	else {
-			bpcRebootSystem();
-		}
-	}
     void PackageDownloadScene::_onProgressUpdate(WebRequest * request, double progress) {
         _updateView->setProgress(progress);
         SceneDirector::currentSceneDirector->render();
