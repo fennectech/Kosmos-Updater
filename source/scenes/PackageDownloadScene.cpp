@@ -117,18 +117,21 @@ namespace ku::scenes {
             _footerView->actions.push_back(new Action(X_BUTTON, "Restart"));
         }
     }
-
-    void PackageDownloadScene::_onAlertViewDismiss(ModalView * view, bool success) {
-        if (success) {
-            if (_restartAlertView->getSelectedOption() == 0) {
-                bpcRebootSystem();
-            }
-            else {
-                SceneDirector::exitApp = true;
-            }
-        }
-    }
-
+	void PackageDownloadScene::_onAlertViewDismiss(ModalView * view, bool success) {
+		if (ConfigManager::getReceivedExFATWarning()) {
+   	  		if (success) {
+    	        if (_restartAlertView->getSelectedOption() == 0) {
+    	            bpcRebootSystem();
+    	        }
+    	        else {
+    	            SceneDirector::exitApp = true;
+        	    }
+	    	}
+		}
+	else {
+			bpcRebootSystem();
+		}
+	}
     void PackageDownloadScene::_onProgressUpdate(WebRequest * request, double progress) {
         _updateView->setProgress(progress);
         SceneDirector::currentSceneDirector->render();
